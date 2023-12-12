@@ -1,4 +1,4 @@
-public class InitializeTypeTest {
+public class CorrectinitializeTypeTest {
 
     public static void main(String[] args) {
         int intValue = 10;

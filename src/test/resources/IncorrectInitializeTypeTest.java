@@ -1,6 +1,6 @@
 import com.sun.org.apache.xpath.internal.operations.String;
 
-public class InitializeTypeTest {
+public class IncorrectInitializeTypeTest {
 
     public static void main(String[] args) {
         int intValue = 10;
