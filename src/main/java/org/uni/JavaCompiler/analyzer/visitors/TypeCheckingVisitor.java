@@ -27,7 +27,6 @@ public class TypeCheckingVisitor extends VoidVisitorAdapter<Void> {
             }
         }
     }
-
     public static boolean isAssignable(ResolvedType assignedType, Type declaredType) {
 
         if (assignedType.isAssignableBy(declaredType.resolve())) {
@@ -40,4 +39,5 @@ public class TypeCheckingVisitor extends VoidVisitorAdapter<Void> {
             return false;
         }
     }
+
 }

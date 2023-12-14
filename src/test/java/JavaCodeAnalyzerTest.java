@@ -14,7 +14,7 @@ public class JavaCodeAnalyzerTest {
     public void CorrectInitializeTypeTest() throws FileNotFoundException {
         ByteArrayOutputStream realErr;
 
-        realErr = JavaCodeAnalyzer.parse(path + "CorrectInitializeTypeTest.java");
+        realErr = JavaCodeAnalyzer.parse(path + "SemanticTests/CorrectInitializeTypeTest.java");
         assertEquals("", realErr.toString());
         realErr.reset();
     }
@@ -23,7 +23,7 @@ public class JavaCodeAnalyzerTest {
     public void IncorrectInitializeTypeTest() throws FileNotFoundException {
         ByteArrayOutputStream realErr;
 
-        realErr = JavaCodeAnalyzer.parse(path + "IncorrectInitializeTypeTest.java");
+        realErr = JavaCodeAnalyzer.parse(path + "SemanticTests/IncorrectInitializeTypeTest.java");
         assertEquals("Error(line 7,col 9) Type mismatch in variable 'stringValue'. Expected type: String, but found type: PrimitiveTypeUsage{name='int'}" + System.lineSeparator() +
                 "Error(line 9,col 9) Type mismatch in variable 's'. Expected type: StringBuilder, but found type: ReferenceType{java.lang.String, typeParametersMap=TypeParametersMap{nameToValue={}}}" + System.lineSeparator(),
                 realErr.toString());
@@ -35,7 +35,7 @@ public class JavaCodeAnalyzerTest {
     public void CorrectDivisionTest() throws FileNotFoundException {
         ByteArrayOutputStream realErr;
 
-        realErr = JavaCodeAnalyzer.parse(path + "CorrectDivisionTest.java");
+        realErr = JavaCodeAnalyzer.parse(path + "SemanticTests/CorrectDivisionTest.java");
 
         assertEquals("", realErr.toString());
         realErr.reset();
@@ -45,7 +45,7 @@ public class JavaCodeAnalyzerTest {
     public void IncorrectDivisionTest() throws FileNotFoundException {
         ByteArrayOutputStream realErr;
 
-        realErr = JavaCodeAnalyzer.parse(path + "IncorrectDivisionTest.java");
+        realErr = JavaCodeAnalyzer.parse(path + "SemanticTests/IncorrectDivisionTest.java");
 
         assertEquals("Error(line 6,col 17) Potential division by zero in expression '12 / 0'" + System.lineSeparator() +
                         "Error(line 8,col 18) Non-numeric types used in arithmetic expression '10 / b'" + System.lineSeparator(),
@@ -59,7 +59,7 @@ public class JavaCodeAnalyzerTest {
     public void IncorrectReturnTypeTypeTest() throws FileNotFoundException {
         ByteArrayOutputStream realErr;
 
-        realErr = JavaCodeAnalyzer.parse(path + "IncorrectReturnTypeTest.java");
+        realErr = JavaCodeAnalyzer.parse(path + "SemanticTests/IncorrectReturnTypeTest.java");
 
         assertEquals("Error:(line 4,col 12) Return type mismatch in method 'foo1'. Declared return type: int, but found type: java.lang.String"+ System.lineSeparator()  +
                      "Error:(line 8,col 12) Return type mismatch in method 'foo2'. Declared return type: String, but found type: int" + System.lineSeparator(),
@@ -69,7 +69,7 @@ public class JavaCodeAnalyzerTest {
     @Test
     public void CorrectReturnTypeTypeTest() throws FileNotFoundException {
         ByteArrayOutputStream realErr;
-        realErr = JavaCodeAnalyzer.parse(path + "CorrectReturnTypeTest.java");
+        realErr = JavaCodeAnalyzer.parse(path + "SemanticTests/CorrectReturnTypeTest.java");
         assertEquals("",  realErr.toString());
         realErr.reset();
     }
@@ -78,7 +78,7 @@ public class JavaCodeAnalyzerTest {
     public void IncorrectNullCheck() throws FileNotFoundException {
         ByteArrayOutputStream realErr;
 
-        realErr = JavaCodeAnalyzer.parse(path + "NullCheckTest.java");
+        realErr = JavaCodeAnalyzer.parse(path + "SemanticTests/NullCheckTest.java");
 
         assertEquals("Warning: variable \"b\" may be null" + System.lineSeparator()  +
                 "Warning: variable \"str\" may be null" + System.lineSeparator(), realErr.toString());

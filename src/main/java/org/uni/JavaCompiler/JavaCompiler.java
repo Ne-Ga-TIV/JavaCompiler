@@ -5,40 +5,34 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.symbolsolver.JavaSymbolSolver;
 import com.github.javaparser.symbolsolver.resolution.typesolvers.ReflectionTypeSolver;
+import javassist.CannotCompileException;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.NotFoundException;
 import org.uni.JavaCompiler.analyzer.JavaCodeAnalyzer;
-import javassist.*;
 import org.uni.JavaCompiler.visitors.ClassDeclarationVisitor;
 
 import java.io.*;
 
 public class JavaCompiler {
 
-    private  static CompilationUnit cu;
-    private static ByteArrayOutputStream ErrorOut;
-    public static byte[] getByteCode(String fileName) throws IOException {
+    public static byte[] getByteCode(String fileName) throws IOException, NotFoundException, CannotCompileException {
         ParserConfiguration parserConfiguration = new ParserConfiguration().setSymbolResolver(
                 new JavaSymbolSolver(new ReflectionTypeSolver()));
 
         FileInputStream fileInputStream = new FileInputStream(fileName);
         StaticJavaParser.setConfiguration(parserConfiguration);
-        cu = StaticJavaParser.parse(fileInputStream);
-        ErrorOut = JavaCodeAnalyzer.parse(fileName);
-        if(!ErrorOut.toString().isEmpty())
-            return ErrorOut.toByteArray();
+        CompilationUnit cu = StaticJavaParser.parse(fileInputStream);
+        ByteArrayOutputStream errorOut = JavaCodeAnalyzer.parse(fileName);
+        if(!errorOut.toString().isEmpty())
+            return errorOut.toByteArray();
+        System.out.println(fileName.substring(0, fileName.lastIndexOf(File.separator)));
+        new ClassDeclarationVisitor().visit(cu,  fileName.substring(0, fileName.lastIndexOf(File.separator)));
 
-        new ClassDeclarationVisitor().visit(cu, null);
-        return ErrorOut.toByteArray();
+        return errorOut.toByteArray();
     }
 
-    public static void createClass(String className) {
-        ClassPool pool = ClassPool.getDefault();
-        CtClass ctClass = pool.makeClass(className);
 
-        try {
 
-            ctClass.writeFile();
-        } catch (CannotCompileException | NotFoundException | IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

@@ -30,7 +30,6 @@ public class MethodDeclarationVisitor extends VoidVisitorAdapter<CtClass> {
 
     }
     private CtClass[] getParameterTypes(MethodDeclaration n, CtClass ctClass) throws NotFoundException {
-
         return n.getParameters().stream()
                 .map(parameter -> {
                     try {
@@ -60,9 +59,14 @@ public class MethodDeclarationVisitor extends VoidVisitorAdapter<CtClass> {
     }
     public static String getType(Type type){
         String typeAsStirng = type.resolve().toDescriptor();
-        System.out.println(typeAsStirng);
         if(typeAsStirng.equals("I"))
             return "int";
+        if(typeAsStirng.equals("F"))
+            return "float";
+        if(typeAsStirng.equals("Z"))
+            return "boolean";
+        if(typeAsStirng.equals("D"))
+            return "double";
         if(typeAsStirng.equals("V"))
             return "void";
         if(typeAsStirng.startsWith("[")) {
