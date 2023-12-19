@@ -25,15 +25,12 @@ public class MethodDeclarationVisitor extends VoidVisitorAdapter<CtClass> {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        System.out.println(methodBody);
-
 
     }
     private CtClass[] getParameterTypes(MethodDeclaration n, CtClass ctClass) throws NotFoundException {
         return n.getParameters().stream()
                 .map(parameter -> {
                     try {
-                        System.out.println(parameter.getType().resolve().toDescriptor());
                         return ctClass.getClassPool().get(getType(parameter.getType()));
                     } catch (NotFoundException e) {
                         e.printStackTrace();

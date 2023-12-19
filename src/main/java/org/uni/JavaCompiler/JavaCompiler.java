@@ -13,6 +13,8 @@ import org.uni.JavaCompiler.analyzer.JavaCodeAnalyzer;
 import org.uni.JavaCompiler.visitors.ClassDeclarationVisitor;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 public class JavaCompiler {
 
@@ -24,10 +26,10 @@ public class JavaCompiler {
         StaticJavaParser.setConfiguration(parserConfiguration);
         CompilationUnit cu = StaticJavaParser.parse(fileInputStream);
         ByteArrayOutputStream errorOut = JavaCodeAnalyzer.parse(fileName);
-        if(!errorOut.toString().isEmpty())
-            return errorOut.toByteArray();
-        System.out.println(fileName.substring(0, fileName.lastIndexOf(File.separator)));
-        new ClassDeclarationVisitor().visit(cu,  fileName.substring(0, fileName.lastIndexOf(File.separator)));
+        if(!errorOut.toString().isEmpty()) {
+            System.out.println(errorOut);
+        }
+        new ClassDeclarationVisitor().visit(cu,  fileName.substring(0, fileName.lastIndexOf("\\")));
 
         return errorOut.toByteArray();
     }

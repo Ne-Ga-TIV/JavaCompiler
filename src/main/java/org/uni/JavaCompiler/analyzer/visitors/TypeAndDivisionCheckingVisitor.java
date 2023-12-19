@@ -12,8 +12,10 @@ public class TypeAndDivisionCheckingVisitor extends VoidVisitorAdapter<Void> {
 
         if (n.isBinaryExpr()) {
             Expression rightExpr = n.getRight();
-            if (!rightExpr.calculateResolvedType().isReferenceType() && rightExpr.toString().equals("0")) {
-                System.out.println("Error" + n.getBegin().get() + " Potential division by zero in expression '" + n + "'");
+            if(n.getOperator() == BinaryExpr.Operator.DIVIDE) {
+                if (!rightExpr.calculateResolvedType().isReferenceType() && rightExpr.toString().equals("0")) {
+                    System.out.println("Error" + n.getBegin().get() + " Potential division by zero in expression '" + n + "'");
+                }
             }
         }
 
