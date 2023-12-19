@@ -1,4 +1,4 @@
-# Java Code Semantic Analyzer
+# Java Code Compiler
 
 This project implements a Java compiler using JavaParser and Javassist. The compiler parses Java source code, generates corresponding bytecode, and provides functionality for code generation and manipulation..
 
@@ -25,7 +25,7 @@ mvn clean install
 *  **Javassist Integration:** Javassist for bytecode manipulation.
 
 ## Usage
-Here's an example Java code snippet demonstrating how to use the semantic analyzer:
+Here's an example Java code snippet demonstrating how to use the compiler:
 ```java
 try {
     byte[] errTrice = JavaCompiler.getByteCode(JavaFile);
